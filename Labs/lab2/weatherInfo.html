@@ -1,0 +1,48 @@
+<!doctype html>
+  <head>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Weather Report</title>
+  </head>
+  <div class = "jumbotron">
+    <div class = "reportTitle"></div>
+    <div class = "time"></div>
+    <div class = "icon"></div>
+    <div id = "box">
+      <div class = "summ"></div>
+      <div class = "temp"></div>
+      <div class = "appTemp"></div>
+    </div>
+  </div>
+  <div class = "container">
+    <div class = "row">
+      <div class = "col-md-7" id = "weeklyData">
+        Weekly Data
+      </div>
+      <div class = "col-md-5" id = "additionalData">
+        Additional Data
+      </div>
+    </div>
+    <div class = "row">
+      <div class = "col-md-7">
+        <div class = "weekSumm"></div>
+        <div class = "row" id="week">
+          <div class = col-md-1>&larr;</div>
+          <div class = "col-md-1" id = "sunday">Sunday</div>
+          <div class = "col-md-1 offset" id = "monday">Monday</div>
+          <div class = "col-md-1 offset" id="tuesday">Tuesday</div>
+          <div class = "col-md-1 offset" id="wednesday">Wednesday</div>
+          <div class = "col-md-1 offset" id="thursday">Thursday</div>
+          <div class = "col-md-1 offset" id="friday">Friday</div>
+          <div class = "col-md-1 offset" id="saturday">Saturday</div>
+          <div class = col-md-1>&rarr;</div>
+        </div>
+      </div>
+      <div class = "col-md-5">
+        Hello
+      </div>
+    </div>
+  </div>
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script> 
+  <script src="js/weatherprocess.js"></script>
+</html>
