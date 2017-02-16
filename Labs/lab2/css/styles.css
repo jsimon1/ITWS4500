@@ -1,0 +1,36 @@
+div, .jumbotron{
+  text-align:center;
+}
+.reportTitle{
+  font-size: 16px;
+}
+
+#box{
+  margin-left:-35px;
+}
+
+.offset{
+  margin-left: 29px;
+}
+
+#week div{
+  text-align:center;
+}
+
+.weekday div{
+  display:block;
+}
+
+.high,.low{
+  margin-bottom:2px;
+}
+
+.icon{
+  margin-left:-30px;
+}
+
+.label,.info{
+  display: inline;
+  color: black;
+  margin:auto;
+}

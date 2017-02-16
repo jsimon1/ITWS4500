@@ -1,6 +1,7 @@
 <!doctype html>
   <head>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Weather Report</title>
   </head>
   <div class = "jumbotron">
@@ -24,21 +25,82 @@
     </div>
     <div class = "row">
       <div class = "col-md-7">
+      <!--Weekly Summary-->
         <div class = "weekSumm"></div>
+        <!-- Week Data -->
         <div class = "row" id="week">
-          <div class = col-md-1>&larr;</div>
-          <div class = "col-md-1" id = "sunday">Sunday</div>
-          <div class = "col-md-1 offset" id = "monday">Monday</div>
-          <div class = "col-md-1 offset" id="tuesday">Tuesday</div>
-          <div class = "col-md-1 offset" id="wednesday">Wednesday</div>
-          <div class = "col-md-1 offset" id="thursday">Thursday</div>
-          <div class = "col-md-1 offset" id="friday">Friday</div>
-          <div class = "col-md-1 offset" id="saturday">Saturday</div>
-          <div class = col-md-1>&rarr;</div>
+          <!--Button for week before-->
+          <div class = col-md-1>
+            <button type = "button" class = "btn btn-default" id="leftArr">&larr;</button>
+          </div>
+          <!--Sunday-->
+          <div class = "col-md-1 weekday" id = "sunday">
+            <div class="weekTitle">Sunday</div>
+            <div id="sundayIcon"></div>
+            <div id="sundayHigh"></div>
+            <div id="sundayLow"></div>
+          </div>
+          <!--Monday-->
+          <div class = "col-md-1 weekday" id = "monday">
+            <div class="weekTitle">Monday</div>
+            <div id="mondayIcon"></div>
+            <div id="mondayHigh"></div>
+            <div id="mondayLow"></div>
+          </div>
+          <!--Tuesday-->
+          <div class = "col-md-1 weekday" id = "tuesday">
+            <div class="weekTitle">Tuesday</div>
+            <div id="tuesdayIcon"></div>
+            <div id="tuesdayHigh"></div>
+            <div id="tuesdayLow"></div>
+          </div>
+          <!--Wednesday-->
+          <div class = "col-md-2 weekday" id = "wednesday">
+            <div class="weekTitle">Wednesday</div>
+            <div id="wednesdayIcon"></div>
+            <div id="wednesdayHigh"></div>
+            <div id="wednesdayLow"></div>
+          </div>
+          <!--Thursday-->
+          <div class = "col-md-2 weekday" id = "thursday">
+            <div class="weekTitle">Thursday</div>
+            <div id="thursdayIcon"></div>
+            <div id="thursdayHigh"></div>
+            <div id="thursdayLow"></div>
+          </div>
+          <!--Friday-->
+          <div class = "col-md-2 weekday" id = "friday">
+            <div class="weekTitle">Friday</div>
+            <div id="fridayIcon"></div>
+            <div id="fridayHigh"></div>
+            <div id="fridayLow"></div>
+          </div>
+          <!--Sautrday-->
+          <div class = "col-md-1 weekday" id = "saturday">
+            <div class="weekTitle">Saturday</div>
+            <div id="saturdayIcon"></div>
+            <div id="saturdayHigh"></div>
+            <div id="saturdayLow"></div>
+          </div>
+          <div class = col-md-1>
+            <button type = "button" class = "btn btn-default" id="rightArr">&rarr;</button>
+          </div>
         </div>
       </div>
-      <div class = "col-md-5">
-        Hello
+      <div class = "col-md-5" id="addDataBox">
+         <div id="addData1">
+           <div class = "label" id="addDataLabel1"></div>
+           <div class = "info" id="addDataInfo1"></div>
+         </div>
+         <div id="addData2">
+           <div class = "label" id="addDataLabel2"></div>
+           <div class = "info" id="addDataInfo2"></div>
+         </div>
+         <div id="addData3">
+           <div class = "label" id="addDataLabel3"></div>
+           <div class = "info" id="addDataInfo3"></div>
+         </div>
+      </div>
       </div>
     </div>
   </div>
