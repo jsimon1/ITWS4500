@@ -11,3 +11,5 @@ Our project is going to be a streamlined menu design app that is deployable to R
 Group project repo: https://github.com/ddbruce/websci-group-2
 Group project bug tracker: https://waffle.io/ddbruce/websci-group-2
 Screenshot of bug tracker: groupBugTracker.png
+
+Demo of the tracker was used because the full tracker instance wouldn't run because it needed to work with an SDHP Email Server which I couldn't get to work.
