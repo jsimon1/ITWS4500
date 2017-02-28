@@ -1,0 +1,20 @@
+{
+  "name": "Twitter-Stream",
+  "version": "0.0.1",
+  "description": "Twitter stream of tweets according to user input",
+  "dependencies": {
+    "express": "^4.10.2",
+    "bson": "^0.4.21",
+    "twitter-stream-api": "0.5.0"
+  },
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsimon1/ITWS4500"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "main": "Twitter Stream",
+  "author": "Jeremy Simon"
+}

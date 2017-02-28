@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Google Maps Location Lookup</title>
+      <link rel="stylesheet" href = "css/bootstrap.css">
+      <link rel="stylesheet" href = "css/styles.css">
+  </head>
+
+  <body ng-controller="mainController">
+    <div class = "container">
+      <div class = "row">
+        <div class = "col-md-12 header"><p>Google Maps Location Lookup</p></div>
+      </div>
+      <div class = "row">
+        <div class="col-md-6 title" ><input id = "search" type="text" placeholder = "Search in Troy, NY (Pizza, Deli, Bowling, etc.)"><p class = "btn btn-default" id = "searchButton">Go</p></button></div>
+        <div class="col-md-6 title"><p>Featured Location</p></div>
+      </div>
+      <div class = "row">
+        <div class = "col-md-6 data">
+          <div class ="row">
+            <div class ="col-md-4 resultRowCols" id ="resultRow1Name">
+            <div class ="col-md-4 resultRowCols" id = "resultRow"
+          <div class = "results" id = "result1"></div>
+          <div class = "results" id = "result2"></div>
+          <div class = "results" id = "result3"></div>
+          <div class = "results" id = "result4"></div>
+          <div class = "results" id = "result5"></div>
+          <div class = "results" id = "result6"></div>
+          <p>Elements will go here</p>
+        </div>
+        <div class = "col-md-6 data"><p>Special Info about one location will go here</p><div id="map"></div></div>
+      </div>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-1.12.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBWz4xdJGebMiPxS3rzNsYW_dtUEEfHc0&libraries=places"></script>
+  <script src="js/locationLookup.js"></script>
+</html>
