@@ -4,6 +4,8 @@
   "description": "Twitter stream of tweets according to user input",
   "dependencies": {
     "express": "^4.10.2",
+    "socket.io": "^1.7.3",
+    "jsonfile": "^2.4.0",
     "bson": "^0.4.21",
     "twitter-stream-api": "0.5.0"
   },

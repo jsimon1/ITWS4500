@@ -40,13 +40,7 @@ $( document ).ready(function(){
 
     //tweetLoop is a function that calls other functions and pauses 3 seconds at the end before repeating
     function tweetLoop(x){
-      if(x!=0){
-        fadeTweets();
-      }
       loadTweets(x);
-      if(x!=0){
-        showTweets();
-      }
       setTimeout(function(){
        tweetLoop(x+5)
       }, 3000);

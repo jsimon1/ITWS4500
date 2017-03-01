@@ -1,7 +1,39 @@
 <doctype html>
-<html>
-  <body>
-    <p>Index</p>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tweet Streamer</title>
+    <link rel="stylesheet" href = "/css/bootstrap.css">
+    <link rel="stylesheet" href = "/css/styles.css">
+  </head>
+  <body ng-controller="mainController" id = "main">
+    <div class ="container">
+      <div class = "row">
+        <div class = "col-md-12"><h1 id="header">Live Tweet Lookup</h1></div>
+      </div>
+      <div class = "row" id = "options">
+        <div class = "col-md-2"><p>Keyword(s)</p></div>
+        <div class = "col-md-3"><input type="text" id = "query" ng-model="query" /></div>
+        <div class = "col-md-2"><p># to stream</p></div>
+        <div class = "col-md-2"><input type="number" id="quantity" ng-model="quantity" min = '1' max='400'/></div>
+        <div class = "col-md-3"><p class = "btn btn-default" ng-click = "loadTweets()" id = "searchButton">Go</p></div>
+      </div>
+      <div class = "row">
+        <div class = "col-md-12" id = "tweets">
+          <div id="tweetBox1"><p ng-model="tweet1" >{{tweet1}}</p></div>
+          <div id="tweetBox2"><p ng-model="tweet2" >{{tweet2}}</p></div>
+          <div id="tweetBox3"><p ng-model="tweet3" >{{tweet3}}</p></div>
+          <div id="tweetBox4"><p ng-model="tweet4" >{{tweet4}}</p></div>
+          <div id="tweetBox5"><p ng-model="tweet5" >{{tweet5}}</p></div>
+        </div>
+      </div>
+    </div>
   </body>
-  <script src="https://code.jquery.com/jquery-1.12.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/loadTweets.js"></script>
 </html>
