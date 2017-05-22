@@ -1,0 +1,347 @@
+<doctype html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tweet Streamer</title>
+    <link rel="stylesheet" href = "/css/bootstrap.css">
+    <link rel="stylesheet" href = "/css/styles.css">
+  </head>
+  <body ng-controller="mainController" id = "main">
+    <div class ="container" ng-show="mainContainer">
+      <div class = "row">
+        <div class = "col-md-12"><h1 class="header">Live Tweet Lookup</h1></div>
+      </div>
+      <div class = "row" id = "options">
+        <div class = "col-md-2"><p>Keyword(s)</p></div>
+        <div class = "col-md-3"><input type="text" id = "query" ng-model="query" /></div>
+        <div class = "col-md-2"><p># to stream</p></div>
+        <div class = "col-md-2"><input type="number" id="quantity" ng-model="quantity" min = '1' max='400'/></div>
+        <div class = "col-md-2">
+          <p class = "btn btn-default" ng-click = "displayTweets()" id = "searchButton">Read Tweets</p>
+          <p class = "btn btn-default" ng-click = "buildDatabase()" id = "searchButton">Build Tweet Database</p>
+        </div>
+        <div class = "col-md-1" id="loading"></div>
+      </div>
+      <div class = "row">
+        <div class = "col-md-12" id = "tweets">
+          <div id="tweetBox1"><p ng-model="tweet1" >{{tweet1}}</p></div>
+          <div id="tweetBox2"><p ng-model="tweet2" >{{tweet2}}</p></div>
+          <div id="tweetBox3"><p ng-model="tweet3" >{{tweet3}}</p></div>
+          <div id="tweetBox4"><p ng-model="tweet4" >{{tweet4}}</p></div>
+          <div id="tweetBox5"><p ng-model="tweet5" >{{tweet5}}</p></div>
+        </div>
+      </div>
+      <div class="row" id='bottomRow'>
+        <div class = "col-md-9">
+          <form>
+            <select id = "exportOption">
+              <option value="json">JSON</option>
+              <option value="csv">CSV</option>
+              <option value="xml">XML</option>
+            </select>
+            <input type="text" id="fName"/>
+            <p class = "btn btn-default" ng-click = "exportTweets()" id = "exportButton">Export</p>
+            <p class = "btn btn-default" ng-click = "reset()" id = "resetButton">Reset</p>
+          </form>
+        </div>
+        <div class = "col-md-3">
+          <p class = "btn btn-default" ng-click = "changeView()" id = "visualizeButton">Visualize Tweets</p>
+          <p class = "btn btn-default" ng-click = "help()" id = "helpButton">Help?</p>
+        </div>
+      </div>
+    </div>
+    <div class ="container" ng-show="visualizeContainer">
+      <div class ="row">
+        <div class ="col-md-12">
+          <h1 class="header">Tweet Analytics for {{queryVal}}</h1>
+          <p class = "btn btn-default" ng-click = "changeViewReturn()" id = "returnButton">Main Menu</p>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col-md-12">
+          <h3 class = "header">Tweets by US Time Zone</h1>
+          <div id="visualization">
+          <div class="legend"></div>
+          </div>
+          <div id="visualization2">
+          <div class="legend2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="/d3.layout.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/loadTweets.js"></script>
+  <script type="text/javascript">
+    function visualize(data){
+      //Prepare tweets for visualization
+      var numEastTweets = 0;
+      var numCentralTweets = 0;
+      var numMountainTweets = 0;
+      var numWestTweets = 0;
+      var legendText = ["West Coast", "Mountain", "Central", "East Coast"];
+      for(i = 0; i < data.length; i++){
+        if(data[i].user_time_zone=="Eastern Time (US & Canada)"){
+          numEastTweets++;
+        }
+        if(data[i].user_time_zone=="Central Time (US & Canada)"){
+          numCentralTweets++;
+        }
+        if(data[i].user_time_zone=="Mountain Time (US & Canada)"){
+          numMountainTweets++;
+        }
+        if(data[i].user_time_zone=="Pacific Time (US & Canada)"){
+          numWestTweets++;
+        }
+      }
+      //Data compiled for Map generation
+      var compiledData = {
+        "Alabama": numCentralTweets,
+        "Alaska": numWestTweets,
+        "Arizona": numMountainTweets,
+        "Arkansas": numCentralTweets,
+        "California": numWestTweets,
+        "Colorado": numMountainTweets,
+        "Connecticut": numEastTweets,
+        "Delaware": numEastTweets,
+        "Florida": numEastTweets,
+        "Georgia": numEastTweets,
+        "Hawaii": numWestTweets,
+        "Idaho": numMountainTweets,
+        "Illinois": numCentralTweets,
+        "Indiana": numEastTweets,
+        "Iowa": numCentralTweets,
+        "Kansas": numCentralTweets,
+        "Kentucky": numCentralTweets,
+        "Louisiana": numCentralTweets,
+        "Maine": numEastTweets,
+        "Maryland": numEastTweets,
+        "Massachusetts": numEastTweets,
+        "Michigan": numEastTweets,
+        "Minnesota": numCentralTweets,
+        "Mississippi": numCentralTweets,
+        "Missouri": numCentralTweets,
+        "Montana": numMountainTweets,
+        "Nebraska": numCentralTweets,
+        "Nevada": numWestTweets,
+        "New Hampshire": numEastTweets,
+        "New Jersey": numEastTweets,
+        "New Mexico": numMountainTweets,
+        "New York": numEastTweets,
+        "North Carolina": numEastTweets,
+        "North Dakota": numCentralTweets,
+        "Ohio": numEastTweets,
+        "Oklahoma": numCentralTweets,
+        "Oregon": numWestTweets,
+        "Pennsylvania": numEastTweets,
+        "Rhode Island": numEastTweets,
+        "South Carolina": numEastTweets,
+        "South Dakota": numCentralTweets,
+        "Tennessee": numCentralTweets,
+        "Texas": numCentralTweets,
+        "Utah": numMountainTweets,
+        "Vermont": numEastTweets,
+        "Virginia": numEastTweets,
+        "Washington": numWestTweets,
+        "West Virginia": numEastTweets,
+        "Wisconsin": numCentralTweets,
+        "Wyoming": numMountainTweets
+      }
+      //console.log("East:"+numEastTweets + "\nCentral:"+numCentralTweets+"\nMountain:"+numMountainTweets+"\nWestern:"+numWestTweets);
+
+      //Visualization code
+
+      //GRAPH 1 - US MAP OF TWEETS FROM TIME ZONE
+      //Height and Width of map
+      var width = 960;
+      var height = 500;
+
+      // D3 Projection
+      var projection = d3.geoAlbersUsa()
+        .translate([width/2, height/2])    // translate to center of screen
+        .scale([1000]);          // scale things down so see entire US
+      
+      var path = d3.geoPath()               // path generator that will convert GeoJSON to SVG paths
+            .projection(projection);  // tell path generator to use albersUsa projection
+      
+      var color = d3.scaleQuantize().range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]);
+
+      var svg = d3.select("#visualization")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+      var domainMin = 100000;
+      var domainMax = 0;
+      
+      d3.json("/us-states.json", function(json) {
+        for(var key in compiledData){
+          var dataState = key;
+          var dataValue = compiledData[key];
+          if(dataValue<domainMin){
+            domainMin = dataValue;
+          }
+          if(dataValue>domainMax){
+            domainMax = dataValue;
+          }
+          for (var j = 0; j < json.features.length; j++) {
+            var jsonState = json.features[j].properties.name;
+            if (dataState == jsonState) {
+              //Copy the data value into the JSON
+              json.features[j].properties.value = dataValue; 
+              //Stop looking through the JSON
+              break;    
+            }
+          }		
+        }
+
+        //Set input domain for color scale
+        color.domain([
+          domainMin, 
+          domainMax
+        ]);
+
+        //Bind data and create one path per GeoJSON feature
+        svg.selectAll("path")
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            .style("fill", function(d) {
+              //Get data value
+              var value = d.properties.value;
+              if (value) {
+                //If value exists…
+                return color(value);
+              } else {
+                //If value is undefined
+                return "#ccc";
+              }
+        });
+      });
+      var legend = d3.select("#visualization").append("svg")
+      			.attr("class", "legend")
+     			.attr("width", 140)
+    			.attr("height", 200)
+   				.selectAll("g")
+   				.data(color.domain().slice().reverse())
+   				.enter()
+   				.append("g")
+     			.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+      legend.append("rect")
+          .attr("width", 18)
+          .attr("height", 18)
+          .style("fill", color);
+
+      legend.append("text")
+          .data(legendText)
+            .attr("x", 24)
+            .attr("y", 9)
+            .attr("dy", ".35em")
+            .text(function(d) { return d; });
+
+      
+      /*//Graph 2 DONUT GRAPH OF USER FOLLOWER RANGES
+      //Preparing data for visualization
+      var lowFollowers = 0;
+      var midLowFollowers = 0;
+      var midFollowers = 0;
+      var midHighFollowers = 0;
+      var highFollowers = 0;
+
+      for(i = 0; i < data.length; i++){
+        if(data[i].user_followers>=0 && data[i].user_followers<100){
+          lowFollowers++;
+        }
+        if(data[i].user_followers>=100 && data[i].user_followers<500){
+          midLowFollowers++;
+        }
+        if(data[i].user_followers>=500 && data[i].user_followers<=2000){
+          midFollowers++;
+        }
+        if(data[i].user_followers>=2000 && data[i].user_followers<=10000){
+          midHighFollowers++;
+        }
+        if(data[i].user_followers>10000){
+          highFollowers++;
+        }
+      }
+      var total = lowFollowers + midLowFollowers + midFollowers + midHighFollowers + highFollowers;
+      var percent1 = (lowFollowers/total)*100;
+      var percent2 = (midLowFollowers/total)*100;
+      var percent3 = (midFollowers/total)*100;
+      var percent4 = (midHighFollowers/total)*100;
+      var percent5 = (highFollowers/total)*100;
+
+      var compiledData2 = [
+        { range: "<100", percent: percent1},
+        { range: "100-500", percent: percent2},
+        { range: "500-2000", percent: percent3},
+        { range: "2000-10000", percent: percent4},
+        { range: ">10000", percent: percent5}
+        ];
+
+      var pie=d3.layout.pie()
+            .value(function(d){return d.percent})
+            .sort(null);
+
+      var w=300,h=300;
+
+      var outerRadius=w/2;
+      var innerRadius=100;
+
+      var color =  d3.scaleQuantize().range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]);
+      var svg = d3.select("#visualization2").append("svg");
+      svg.attr("width", w).attr("height", h)
+      var chartLayer = svg.append("g").classed("chartLayer", true);
+      chartLayer
+            .attr("width", w)
+            .attr("height", h)
+  
+      var arcs = d3.pie()
+            .sort(null)
+            .value(function(d) { return d.percent; })
+            (compiledData2);
+      
+       var arc = d3.arc()
+            .outerRadius(w/2)
+            .innerRadius(h/4)
+            .padAngle(0.03)
+            .cornerRadius(8);
+      
+       var pieG = chartLayer.selectAll("g")
+            .data(compiledData2)
+            .enter()
+            .append("g")
+            .attr("transform", "translate("+[w/2, h/2]+")");
+
+       var block = pieG.selectAll(".arc")
+            .data(arcs);
+            
+      var newBlock = block.enter().append("g").classed("arc", true);
+
+      newBlock.append("path")
+            .attr("d", arc)
+            .attr("id", function(d, i) { return "arc-" + i })
+            .attr("stroke", "gray")
+            .attr("fill", function(d,i){ return d3.interpolateCool(Math.random()) });
+      
+      newBlock.append("text")
+            .attr("dx", 55)
+            .attr("dy", -5)
+            .append("textPath")
+            .attr("xlink:href", function(d, i) { return "#arc-" + i; })
+            .text(function(d) { console.log(d);return d.data.range })
+*/
+
+    }
+    </script>
+</html>

@@ -1,0 +1,5 @@
+Jeremy Simon - Websci Lab 9
+
+Built off of lab 7 - this labe only called for a few minor additions. First, a batch file was created (install.bat) which runs npm install, and once that's finished the user is echoed of basic directions to begin the application. Next, a landing page was added by adding an ng-show variable to the main container (the application) and a new landing container. During the initialization of the controller the views are set to false and true accordingly. Then once the begin button is clicked the views are switched. To allow the user to refresh the tweets at their pleasure, I added a check on the Read Tweets call by adding an if statement to the streamTweets() functon in loadTweets.js. If there are already tweets loaded, we don't want those anymore because the user wants to refresh their tweets, so they are emptied and the user is notified. Then the new tweets are recieved and the application continues as normal. Finally, I added a help? button for users confused by the interface of the main container, furthering the brand of my page. All other functiona requirements were added in lab 7 or earlier.
+
+Sources:

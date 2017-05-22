@@ -20,7 +20,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/loadTweets.js', function(req, res){
-  res.sendFile(__dirname + '/loadTweets.js');
+  res.sendFile(__dirname + '/js/loadTweets.js');
 });
 
 app.get('/tweets.json', function(req, res){

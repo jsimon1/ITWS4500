@@ -1,0 +1,44 @@
+#header{
+  text-align:center;
+}
+#tweets{
+  border: 5px solid black;
+  height:80%;
+  background-color: #7acaff;
+  border-radius: 10px;
+}
+#tweets div{
+  height:20%;
+  border-top: 1px solid black;
+}
+
+#tweets p{
+  text-align:center;
+  vertical-align: middle;
+  line-height:50px;
+  font-size:20px;
+  text-decoration: bold;
+}
+
+#options{
+  height:5%;
+  font-size:22px;
+}
+
+#main{
+  background-color:#b9afd1;
+}
+
+#introContent{
+  font-size:40px;
+  text-align:center;
+  margin-top:15%;
+}
+
+#landingButton{
+  margin-top:15%;
+}
+
+#helpButton{
+  float: right;
+}

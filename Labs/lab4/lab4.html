@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Google Maps Location Lookup</title>
+      <title>Day Planner</title>
       <link rel="stylesheet" href = "css/bootstrap.css">
       <link rel="stylesheet" href = "css/styles.css">
   </head>
@@ -12,26 +12,67 @@
   <body ng-controller="mainController">
     <div class = "container">
       <div class = "row">
-        <div class = "col-md-12 header"><p>Google Maps Location Lookup</p></div>
+        <div class = "col-md-12 header"><p>Day Planner - Google Places and Weather Lookup</p></div>
       </div>
+      <!-- First row below the header, the search bar and the title for the weather data -->
       <div class = "row">
-        <div class="col-md-6 title" ><input id = "search" type="text" placeholder = "Search in Troy, NY (Pizza, Deli, Bowling, etc.)"><p class = "btn btn-default" id = "searchButton">Go</p></button></div>
-        <div class="col-md-6 title"><p>Featured Location</p></div>
+        <div class="col-md-6 title" ><input id = "search" type="text" placeholder = "Search in Troy, NY (Pizza, Deli, Bowling, etc.)"><p class = "btn btn-default" ng-click = "searchButton()" id = "searchButton">Go</p></button></div>
+        <div class="col-md-6 title"><p>Weather For Today</p></div>
       </div>
+      <!-- Five result divs with information to hold the Google places info -->
       <div class = "row">
         <div class = "col-md-6 data">
-          <div class ="row">
-            <div class ="col-md-4 resultRowCols" id ="resultRow1Name">
-            <div class ="col-md-4 resultRowCols" id = "resultRow"
-          <div class = "results" id = "result1"></div>
-          <div class = "results" id = "result2"></div>
-          <div class = "results" id = "result3"></div>
-          <div class = "results" id = "result4"></div>
-          <div class = "results" id = "result5"></div>
-          <div class = "results" id = "result6"></div>
-          <p>Elements will go here</p>
+          <div class = "results" id = "result">
+            <p class = "name" ng-model="name">{{name}}</p>
+            <p class = "address" ng-model="address">{{address}}</p>
+            <p class = "website" ng-model="website">{{website}}</p>
+          </div>
+          <div class = "results" id = "result1">
+            <p class = "name" ng-model="name1">{{name1}}</p>
+            <p class = "address" ng-model="address1">{{address1}}</p>
+            <p class = "website" ng-model="website1">{{website1}}</p>
+          </div>
+          <div class = "results" id = "result2">
+            <p class = "name" ng-model="name2">{{name2}}</p>
+            <p class = "address" ng-model="address2">{{address2}}</p>
+            <p class = "website" ng-model="website2">{{website2}}</p>
+          </div>
+          <div class = "results" id = "result3">
+            <p class = "name" ng-model="name3">{{name3}}</p>
+            <p class = "address" ng-model="address3">{{address3}}</p>
+            <p class = "website" ng-model="website3">{{website3}}</p>
+          </div>
+          <div class = "results" id = "result4">
+            <p class = "name" ng-model="name4">{{name4}}</p>
+            <p class = "address" ng-model="address4">{{address4}}</p>
+            <p class = "website" ng-model="website4">{{website4}}</p>
+          </div>
+          <div class = "results" id = "result5">
+            <p class = "name" ng-model="name5">{{name5}}</p>
+            <p class = "address" ng-model="address5">{{address5}}</p>
+            <p class = "website" ng-model="website5">{{website5}}</p>
+          </div>
         </div>
-        <div class = "col-md-6 data"><p>Special Info about one location will go here</p><div id="map"></div></div>
+        <!-- Right half of the application, weather information -->
+        <div class = "col-md-6 data">
+          <div id = "summary">
+            <p id = "summaryText" ng-model="summText">{{summText}}</p></div>
+          <div id = "labelStatContainer">
+            <div id = "labels">
+              <p class = "weatherLabel">Temperature:</p>
+              <p class = "weatherLabel">Chance of Rain:</p>
+              <p class = "weatherLabel">Humidity:</p>
+              <p class = "weatherLabel">Wind Speed:</p>
+              <p class = "label"></p>
+            </div><div id = "stats">
+              <p class = "statistic" ng-model="temp">{{temp}}</p>
+              <p class = "statistic" ng-model="precipProb">{{precipProb}}</p>
+              <p class = "statistic" ng-model="humidity">{{humidity}}</p>
+              <p class = "statistic" ng-model="windSpeed">{{windSpeed}}</p>
+            </div>
+          </div>
+          <div id = "darkSkyFooter">Powered by Dark Sky</div>
+        <div id="map"></div></div>
       </div>
     </div>
   </body>
